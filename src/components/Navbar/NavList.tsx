@@ -4,7 +4,7 @@ import {Nav} from "react-bootstrap";
 
 export default function NavList() {
     return (
-        <Nav as={'ul'} className={'ms-auto'} defaultActiveKey={'none'} navbarScroll={true}>
+        <Nav as={'ul'} className={'ms-auto'} defaultActiveKey={'#about'} navbarScroll={true}>
             <Nav.Item as={'li'} className={'nav-link'}>
                 <Nav.Link href={'#about'}>About</Nav.Link>
             </Nav.Item>

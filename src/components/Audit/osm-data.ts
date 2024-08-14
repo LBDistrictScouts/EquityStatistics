@@ -34,7 +34,7 @@ interface Section {
     upgrades: Upgrades
 }
 
-interface UserProfile {
+export interface UserProfile {
     email: string
     full_name: string
     has_parent_access: boolean
@@ -45,10 +45,9 @@ interface UserProfile {
     user_id: number
 }
 
-interface UserResponse {
-    data: UserProfile
+export interface UserResponse {
+    data: UserProfile | undefined
     error: null | string
-
 }
 
 
@@ -78,9 +77,13 @@ export async function processUserInfo(response: Response): Promise<UserResponse>
 }
 
 
-export async function userResourceInfo(): Promise<UserResponse|undefined> {
+export async function userResourceInfo(): Promise<UserResponse> {
     if (!checkAuthenticated()) {
-        return new Promise(() => {return undefined})
+        console.log('Unauthenticated User Resource Info')
+        return {
+            data: undefined,
+            error: 'Not Authenticated.',
+        };
     }
 
     function resolveEndpoint(
@@ -112,6 +115,13 @@ export async function userResourceInfo(): Promise<UserResponse|undefined> {
 
     return processUserInfo(response)
 }
+
+export const userSectionInfo = await userResourceInfo().then((response) => {
+    if (typeof response === 'undefined') {
+        throw new Error('Not Authenticated')
+    }
+    return response.data
+});
 
 
 export async function getData(): Promise<void> {

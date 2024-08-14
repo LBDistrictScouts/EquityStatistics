@@ -4,7 +4,7 @@ import {Container} from "react-bootstrap";
 
 export default function Process() {
     return (
-        <section className="text-center content-section" id="process">
+        <section className="text-center process-section content-section" id="process">
             <Container>
                 <div className="row">
                     <div className="col-lg-8 mx-auto">

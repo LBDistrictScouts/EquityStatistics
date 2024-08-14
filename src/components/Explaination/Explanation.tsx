@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Explanation() {
     return (
-        <section className="text-center content-section" id="about">
+        <section className="text-center about-section content-section" id="about">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-8 mx-auto">

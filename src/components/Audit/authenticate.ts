@@ -63,6 +63,7 @@ const access_token_cookie_expiry_key = access_token_cookie_key + '-expiry'
 
 export function getAccessToken(): string | undefined {
     if (check_expired(access_token_cookie_expiry_key)) {
+        console.log('Cleaned Expired Access Token Cookie.')
         removeCookie(access_token_cookie_key);
         removeCookie(access_token_cookie_expiry_key);
     }
@@ -229,5 +230,15 @@ export function processChallenges(response: Response): void {
             console.error('WWW-Authenticate Challenge', challenge)
         }
         throw new Error() // Handle WWW-Authenticate Challenges as needed
+    }
+}
+
+export class UnauthenticatedError implements Error {
+    message: string;
+    name: string;
+
+    constructor(message: string) {
+        this.message = message
+        this.name = 'UnauthenticatedError'
     }
 }
