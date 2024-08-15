@@ -1,19 +1,40 @@
-import * as oauth from 'oauth4webapi'
-import {getCookie, setCookie, removeCookie} from 'typescript-cookie'
-import {getOriginDevLocalhost, getOrMakeCookie, validateString} from "../../utilities";
+import {getCookie, removeCookie} from 'typescript-cookie'
+import {getOriginDevLocalhost, getOrMakeCookie, setValidCookie, validateString} from "../../utilities";
 import moment from "moment";
 
-// Prerequisites
+// @ts-ignore
+import * as oauth from 'oauth4webapi';
 
-const manifest_url: URL = new URL('https://t3sbhazov3.execute-api.eu-west-1.amazonaws.com/equity/auth');
-const issuer_url: URL = new URL('https://www.onlinescoutmanager.co.uk');
+// Prerequisites
+if (!process.env.REACT_APP_MANIFEST_URL) {
+    throw new Error('Missing REACT_APP_MANIFEST_URL')
+}
+const manifest_url: URL = new URL(process.env.REACT_APP_MANIFEST_URL);
+
+if (!process.env.REACT_APP_ISSUER_URL) {
+    throw new Error('Missing REACT_APP_ISSUER_URL')
+}
+const issuer_url: URL = new URL(process.env.REACT_APP_ISSUER_URL);
+
+if (!process.env.REACT_APP_CLIENT_ID) {
+    throw new Error('Missing REACT_APP_CLIENT_ID')
+}
+const client_id: string = process.env.REACT_APP_CLIENT_ID;
+
+if (!process.env.REACT_APP_REDIRECT_URI) {
+    throw new Error('Missing REACT_APP_REDIRECT_URI')
+}
+const redirect_uri: string = process.env.REACT_APP_REDIRECT_URI;
+
+if (!process.env.REACT_APP_SCOPE) {
+    throw new Error('Missing REACT_APP_SCOPE')
+}
+const scope: string = process.env.REACT_APP_SCOPE;
+
 const algorithm:
     | 'oauth2' /* For .well-known/oauth-authorization-server discovery */
     | 'oidc' /* For .well-known/openid-configuration discovery */
     | undefined = 'oidc';
-const client_id: string = 'sFmCFXuCCcrlhlFd1w0hr9AMS7Y44aiF';
-const redirect_uri: string = 'https://localhost:3001';
-const scope: string = 'section:member:read';
 
 export const as = await oauth
     .discoveryRequest(manifest_url, {algorithm})
@@ -78,7 +99,7 @@ function setAccessToken(tokenValue: string): void {
         removeCookie(access_token_cookie_expiry_key);
     }
 
-    setCookie(access_token_cookie_key, tokenValue, {sameSite: 'none'});
+    setValidCookie(access_token_cookie_key, tokenValue, {sameSite: 'none', secure: true});
 }
 
 
@@ -154,6 +175,7 @@ export async function processCode(): Promise<void> {
 
     console.log('Access Token Response', result)
     setAccessToken(result.access_token)
+    window.location.href = '/'
 }
 
 type Constructor<T extends {} = {}> = new (...args: any[]) => T

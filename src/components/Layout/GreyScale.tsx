@@ -1,6 +1,6 @@
 import React from "react";
 import "./assets/bootstrap/css/bootstrap.min.css";
-import './layout.css'
+import "./layout.css"
 import './assets/fonts/font-awesome.min.css'
 import GreyScaleNavbar from "../Navbar/GreyScaleNavbar";
 import GreyScaleFooter from "../Footer/Footer";

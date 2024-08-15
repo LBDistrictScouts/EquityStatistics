@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://equity-statistics.lbd.org.uk/schema/data-submission-schema.json",
+  "title": "Equity Audit Data Submission Record",
+  "description": "The data structure to be submitted to the API for Equity Audit submission, per section.",
+  "$defs": {
+    "extractRecord": {
+      "title": "Extract Record",
+      "description": "The Member Record, anonymised with only minimal information.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "memberId": {
+          "title": "Member ID",
+          "description": "The member record ID, this is only usable within OSM to return data to PII form. Acts as a tokenisation method to maintain anonymity. Needed for deduplication of records shared between multiple sections.",
+          "type": "number"
+        },
+        "sectionId": {
+          "title": "Section ID",
+          "description": "The section record ID, used to easily deduplicate submissions and to align submissions over time. Reflected here to keep relational integrity during transform.",
+          "type": "number"
+        },
+        "ageYears": {
+          "title": "Number of Years Old",
+          "description": "Value to enable age range distribution analysis.",
+          "type": "number"
+        },
+        "ageMonths": {
+          "title": "Number of Months Old, past the year.",
+          "description": "Used in conjunction with the age in years to produce a valid value.",
+          "type": "number"
+        },
+        "selectedPostcode": {
+          "title": "Selected Postcode",
+          "description": "Extracted from the record to represent the best estimate of the postcode at which the member resides. Will also appear in the 'otherPostcodes' array.",
+          "type": "string"
+        },
+        "otherPostcodes": {
+          "title": "Other Postcodes",
+          "description": "All of the detected postcodes on the record, excluding the medical record postcode. Used in case the estimation in code is incorrect.",
+          "type": "array",
+          "additionalItems": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "groupName": {
+      "title": "Group Name",
+      "description": "The name of the Scout Group. Used to identify the group for reporting purposes.",
+      "type": "string"
+    },
+    "groupId": {
+      "title": "Group ID",
+      "description": "The name of the Group ID. Used to deduplicate group records.",
+      "type": "number"
+    },
+    "sectionName": {
+      "title": "Section Name",
+      "description": "The labelled name of the section, e.g. 'Knights Cubs' or just 'Cubs'.",
+      "type": "string"
+    },
+    "sectionId": {
+      "title": "Section ID",
+      "description": "The section record ID, used to easily deduplicate submissions and to align submissions over time.",
+      "type": "number"
+    },
+    "sectionType": {
+      "title": "Section Type",
+      "description": "The type of section, age range and special sections included.",
+      "type": "string",
+      "enum": [
+        "squirrels",
+        "beavers",
+        "cubs",
+        "scouts",
+        "explorers",
+        "waiting",
+        "adults"
+      ]
+    },
+    "userName": {
+      "title": "User Name",
+      "description": "The Full Name of the user submitting the form. For the team to communicate with the user following submission.",
+      "type": "string"
+    },
+    "userEmail": {
+      "title": "User Email",
+      "description": "The email of the user submitting the form. Used to contact the user in the event of an issue and to follow up.",
+      "type": "string"
+    },
+    "userId": {
+      "title": "User ID",
+      "description": "The OSM user ID of the user submitting the form. Used to align submissions reliably.",
+      "type": "number"
+    },
+    "submissionTimestamp": {
+      "title": "Submission Timestamp",
+      "description": "The timestamp of when the submission was prepared and submitted. In ISO 8601 format.",
+      "type": "string"
+    },
+    "members": {
+      "title": "Members Array",
+      "type": "array",
+      "additionalItems": false,
+      "items": {
+        "$ref": "#/$defs/extractRecord"
+      }
+    }
+  }
+}

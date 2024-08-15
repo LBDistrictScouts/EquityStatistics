@@ -1,5 +1,23 @@
 div #audit {
-  background-image:url('./audit-submit-bg.jpg?h=a1c980f5883ce005385e0ccdc3919d4c');
+  //height: 100vh; /* Full height */
+  height: auto;
   width: 100%;
-  height: 900px;
+  background-image:url('./audit-submit-bg.jpg?h=a1c980f5883ce005385e0ccdc3919d4c');
+  background-attachment: fixed; /* Parallax effect */
+  background-size: cover; /* Ensure the image covers the entire section */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent image repetition */
+
+  padding-top: 5rem;
+  padding-bottom: 10rem;
+
+  .content {
+    display: flex;
+    height: fit-content;
+    align-items: center; /* Center the content vertically */
+    justify-content: center; /* Center the content horizontally */
+    color: #fff; /* Text color for visibility */
+    padding: 20px; /* Some padding around the content */
+    text-align: center; /* Center text inside the content */
+  }
 }

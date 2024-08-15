@@ -1,5 +1,7 @@
 import React from "react";
-import {Container} from "react-bootstrap";
+import {Container, Card, Table} from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faShieldCheck, faShieldXmark} from '@awesome.me/kit-6ca014ec2b/icons/classic/light'
 
 
 export default function Process() {
@@ -14,8 +16,48 @@ export default function Process() {
                             any purpose, personal or commercial.</p>
                         <p>This theme features stock photos by Gratisography along with a
                             custom Google Maps skin courtesy of Snazzy Maps.</p>
-                        <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with SASS and LESS files
-                            for easy customization!</p>
+                        <Card>
+                            <Card.Header>
+                                Fields Extracted
+                            </Card.Header>
+                            <Card.Body>
+                                <Table>
+                                    <thead>
+                                        <tr>
+                                            <td><span className={'fw-bolder'}>Field</span></td>
+                                            <td><span className={'fw-bolder'}>Sent to District</span></td>
+                                            <td><span className={'fw-bolder'}>Reason for Collection</span></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Group</td>
+                                            <td className={'text-warning text-center'}>
+                                                <FontAwesomeIcon size={'xl'} icon={faShieldCheck}/> Yes.
+                                            </td>
+                                            <td>Required to help differentiate by group and display results.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Section</td>
+                                            <td className={'text-warning text-center'}>
+                                                <FontAwesomeIcon size={'xl'} icon={faShieldCheck}/> Yes.
+                                            </td>
+                                            <td>Required to help differentiate by section & section type and display results.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Member Name</td>
+                                            <td className={'text-success align-content-center text-center'}>
+                                                <FontAwesomeIcon size={'xl'} icon={faShieldXmark}/> No.
+                                            </td>
+                                            <td>Displayed locally on the screen to help users identify the records. Not sent
+                                                in the data package District.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
+                            </Card.Body>
+                        </Card>
+
                     </div>
                 </div>
             </Container>

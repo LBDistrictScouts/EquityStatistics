@@ -16,7 +16,7 @@ export function getOrMakeCookie(cookie_key: string, cookie_generator: Function):
 
     if (!validateString(cookie_value)) {
         return_value = cookie_generator()
-        setCookie(cookie_key, return_value)
+        setCookie(cookie_key, return_value, {sameSite: 'none', secure: true});
     } else {
         return_value = cookie_value
     }
@@ -26,6 +26,13 @@ export function getOrMakeCookie(cookie_key: string, cookie_generator: Function):
     }
 
     return return_value
+}
+
+
+export function setValidCookie(cookie_key: string, cookie_value: number|string|undefined, attributes: object = {}): string {
+    attributes = {sameSite: 'none', secure: true} || attributes
+
+    return setCookie(cookie_key, cookie_value, attributes);
 }
 
 

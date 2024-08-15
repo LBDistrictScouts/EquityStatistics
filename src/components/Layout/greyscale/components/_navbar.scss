@@ -17,6 +17,25 @@
         }
     }
 
+    .nav-link {
+        color: $black;
+        padding: 0.5rem;
+        border-bottom: 0.25rem solid transparent;
+
+        &:hover {
+            color: $primary;
+        }
+
+        &:active {
+            color: darken($primary, 15%);
+        }
+
+        &.active {
+            background-color: $primary;
+            outline: none;
+        }
+    }
+
     .navbar-brand {
         color: $black;
         font-weight: 700;
@@ -26,7 +45,7 @@
     .navbar-nav {
         .nav-item {
             &:hover {
-                color: fade($white, 80%);
+                color: $black;
                 outline: none;
                 background-color: transparent;
             }
@@ -48,20 +67,28 @@
 
         .navbar-brand {
             padding: 0.5rem 0;
-            color: fade-out($white, 0.5);
+            color: $black;
         }
 
         .nav-link {
             transition: none;
             padding: 1rem 0.5rem;
-            color: fade-out($white, 0.5);
+            color: $black;
 
             &:hover {
-                color: fade-out($white, 0.25);
+                color: fade-out($primary, 0.25);
             }
 
             &:active {
                 color: $white;
+            }
+
+            &.active {
+                color: $white;
+
+                &:hover {
+                    color: $black;
+                }
             }
         }
 
@@ -86,7 +113,7 @@
                 }
 
                 &.active {
-                    color: $primary;
+                    color: $white;
                     outline: none;
                     border-bottom: 0.25rem solid $primary;
                 }
