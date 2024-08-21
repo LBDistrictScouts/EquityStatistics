@@ -327,7 +327,7 @@ export async function processUserInfo(response: Response): Promise<UserResponse>
 
 export async function userResourceInfo(): Promise<UserResponse> {
     if (!checkAuthenticated()) {
-        console.log('Unauthenticated User Resource Info')
+        // console.log('Unauthenticated User Resource Info')
         return {
             data: undefined,
             error: 'Not Authenticated.',

@@ -156,7 +156,7 @@ export default function OsmAudit() {
                 setFilteredOutCount(data.filteredOutCount)
             }
         })
-    }, [isTermIdSet]);
+    }, [isTermIdSet, term, section]);
 
     if (!isAuthenticated) {
         return (
@@ -195,7 +195,7 @@ export default function OsmAudit() {
                                                     User Info
                                                 </Card.Header>
                                                 <Card.Body>
-                                                    <Table hover>
+                                                    <Table hover responsive>
                                                         <tbody>
                                                             <tr>
                                                                 <td>User Full Name</td>
@@ -230,7 +230,7 @@ export default function OsmAudit() {
                                                 Section Info
                                             </Card.Header>
                                             <Card.Body>
-                                                <Table hover>
+                                                <Table hover responsive>
                                                     <tbody>
                                                     {section ? (
                                                         <>
@@ -283,6 +283,7 @@ export default function OsmAudit() {
                             )}
                         </Col>
                         <Col>
+                            <br/>
                             <UserInfoModal
                                 buttonLabel={'Change Section & Term'}
 
@@ -303,7 +304,7 @@ export default function OsmAudit() {
                         <Row>
                             <Col>
                                 <Form onSubmit={handleDataSubmit}>
-                                    <Table striped bordered hover>
+                                    <Table striped bordered hover responsive>
                                         <thead className="thead-dark">
                                         <tr>
                                             <td>Include Member</td>
