@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import './audit.css';
+import './audit.scss';
 
 import {checkAuthenticated, checkCodeInUrl, getRedirect, processCode} from './authenticate';
 import {Col, Container, Row, Table, Badge, Card, Form, Button} from "react-bootstrap";

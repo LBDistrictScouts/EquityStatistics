@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import {getOrMakeCookie} from './utilities';
+import {getOrMakeCookie} from './utilities.ts';
 
 test('Tests utility function', () => {
   let result = getOrMakeCookie('test', () => {return 'Goat123'});
