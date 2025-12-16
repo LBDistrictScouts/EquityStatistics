@@ -1,5 +1,5 @@
 import React from "react";
-import './header.scss'
+import './header.css'
 
 export default function GreyScaleHeader() {
     return (
